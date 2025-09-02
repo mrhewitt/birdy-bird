@@ -1,0 +1,112 @@
+[gd_scene load_steps=12 format=3 uid="uid://eknmxiaijoh5"]
+
+[ext_resource type="Script" uid="uid://2neqmkyo6xpc" path="res://world/world.gd" id="1_mmdvd"]
+[ext_resource type="PackedScene" uid="uid://c4xngmnw1f3x1" path="res://player/player.tscn" id="2_4717r"]
+[ext_resource type="Texture2D" uid="uid://cjcr7di65s4vj" path="res://assets/background/backgrounds.png" id="2_tcf2h"]
+[ext_resource type="FontFile" uid="uid://b17vgjeonwdha" path="res://assets/font/Beaver Punch.otf" id="3_4717r"]
+[ext_resource type="Script" uid="uid://cf0fvmls65xsp" path="res://world/camera_2d.gd" id="4_h5o24"]
+[ext_resource type="Texture2D" uid="uid://cb6v1c17osy4l" path="res://assets/ui/ScoreBackground.png" id="5_ai45w"]
+[ext_resource type="PackedScene" uid="uid://b6dfrcm7iwwd1" path="res://ui/score_label.tscn" id="6_4papg"]
+[ext_resource type="FontFile" uid="uid://dpyqhsm3me6t2" path="res://assets/font/LondrinaSolid-Black.ttf" id="7_fyhu2"]
+[ext_resource type="PackedScene" uid="uid://0uco7v1knhu0" path="res://ui/crown_sprite.tscn" id="8_4papg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h5o24"]
+font = ExtResource("3_4717r")
+font_size = 64
+font_color = Color(0.756863, 0.211765, 0.211765, 1)
+outline_size = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_ov2xu"]
+font = ExtResource("7_fyhu2")
+font_size = 48
+outline_size = 12
+outline_color = Color(0.0862745, 0.0588235, 0.345098, 1)
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_mmdvd")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.25, 0.25)
+motion_mirroring = Vector2(720, 1280)
+
+[node name="BackgroundSprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("2_tcf2h")
+centered = false
+hframes = 6
+
+[node name="Player" parent="." instance=ExtResource("2_4717r")]
+position = Vector2(192, 544)
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("4_h5o24")
+player = NodePath("../Player")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="StartPrompLabel" type="Label" parent="HUD"]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -395.0
+offset_bottom = -327.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Click or Tap to start!"
+label_settings = SubResource("LabelSettings_h5o24")
+horizontal_alignment = 1
+
+[node name="ScoreArea" type="Control" parent="HUD"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 96.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/ScoreArea"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_ai45w")
+
+[node name="ScoreLabel" parent="HUD/ScoreArea/TextureRect" instance=ExtResource("6_4papg")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -49.5
+offset_top = -30.5
+offset_right = 48.5
+offset_bottom = 46.5
+text = "0"
+label_settings = SubResource("LabelSettings_ov2xu")
+
+[node name="CrownSprite1" parent="HUD/ScoreArea/TextureRect" instance=ExtResource("8_4papg")]
+unique_name_in_owner = true
+position = Vector2(14, 11)
+rotation = -0.703614
+
+[node name="CrownSprite2" parent="HUD/ScoreArea/TextureRect" instance=ExtResource("8_4papg")]
+unique_name_in_owner = true
+position = Vector2(46, 0)
+
+[node name="CrownSprite3" parent="HUD/ScoreArea/TextureRect" instance=ExtResource("8_4papg")]
+unique_name_in_owner = true
+position = Vector2(77, 10)
+rotation = 0.622676
+
+[node name="Button" type="Button" parent="HUD"]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="PipeGenerator" type="Timer" parent="."]
+
+[connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
+[connection signal="start_game" from="Player" to="." method="_on_player_start_game"]
+[connection signal="timeout" from="PipeGenerator" to="." method="_on_pipe_generator_timeout"]

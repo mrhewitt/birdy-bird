@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://fsh5hyqo2xe3"]
+
+[ext_resource type="Script" uid="uid://dfultxwgxbxa8" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dc5jw4slig0nu" path="res://ui/title_screen.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://biuo4med0p8ir" path="res://ui/bird_select_screen.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://cb5w0xq0y46v1" path="res://ui/score_screen.tscn" id="4_1bvp3"]
+[ext_resource type="AudioStream" uid="uid://blpb4b8iow21w" path="res://assets/audio/dancing-robot.ogg" id="5_lquwl"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h2yge")
+current_bird = null
+
+[node name="TitleScreen" parent="." instance=ExtResource("2_0xm2m")]
+layout_mode = 1
+
+[node name="BirdSelectScreen" parent="." instance=ExtResource("3_h2yge")]
+visible = false
+layout_mode = 1
+
+[node name="ScoreScreen" parent="." instance=ExtResource("4_1bvp3")]
+visible = false
+layout_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_lquwl")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[connection signal="pick_bird" from="TitleScreen" to="." method="_on_title_screen_pick_bird"]
+[connection signal="start_game" from="TitleScreen" to="." method="_on_title_screen_start_game"]
+[connection signal="select_bird" from="BirdSelectScreen" to="." method="_on_bird_select_screen_select_bird"]
+[connection signal="back_to_menu" from="ScoreScreen" to="." method="_on_score_screen_back_to_menu"]

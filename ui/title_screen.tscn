@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://dc5jw4slig0nu"]
+
+[ext_resource type="Texture2D" uid="uid://ckk60xyvjpvcl" path="res://assets/ui/title.png" id="1_bor1v"]
+[ext_resource type="Script" uid="uid://bvt3nweify7hy" path="res://ui/title_screen.gd" id="1_qer0c"]
+[ext_resource type="PackedScene" uid="uid://omylpo6nsbcc" path="res://ui/play_button.tscn" id="3_dk6f0"]
+[ext_resource type="PackedScene" uid="uid://b6dfrcm7iwwd1" path="res://ui/score_label.tscn" id="4_dk6f0"]
+[ext_resource type="Texture2D" uid="uid://d2ltcr6gdjpfh" path="res://assets/ui/BirdSelectButton.png" id="6_6qcwj"]
+[ext_resource type="Script" uid="uid://cp5e5xre6evgd" path="res://ui/screen_button.gd" id="6_wa5rm"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sfunj"]
+texture = ExtResource("6_6qcwj")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rg5jq"]
+texture = ExtResource("6_6qcwj")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jprmh"]
+texture = ExtResource("6_6qcwj")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rakse"]
+texture = ExtResource("6_6qcwj")
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qer0c")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bor1v")
+
+[node name="PlayButton" parent="." instance=ExtResource("3_dk6f0")]
+custom_minimum_size = Vector2(196, 196)
+layout_mode = 1
+anchor_top = 0.662
+anchor_bottom = 0.662
+offset_left = -98.0
+offset_top = -98.0
+offset_right = 98.0
+offset_bottom = 98.0
+grow_vertical = 2
+
+[node name="ScoreLabel" parent="." instance=ExtResource("4_dk6f0")]
+layout_mode = 1
+offset_left = -60.0
+offset_right = 38.0
+
+[node name="PickBirdButton" type="Button" parent="."]
+custom_minimum_size = Vector2(164, 164)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -228.0
+offset_right = 228.0
+offset_bottom = -64.0
+grow_vertical = 0
+theme_override_styles/focus = SubResource("StyleBoxTexture_sfunj")
+theme_override_styles/hover = SubResource("StyleBoxTexture_rg5jq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jprmh")
+theme_override_styles/normal = SubResource("StyleBoxTexture_rakse")
+script = ExtResource("6_wa5rm")
+metadata/_custom_type_script = "uid://cp5e5xre6evgd"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="PickBirdButton" to="." method="_on_pick_bird_button_pressed"]

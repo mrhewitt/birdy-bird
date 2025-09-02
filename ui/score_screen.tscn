@@ -1,0 +1,145 @@
+[gd_scene load_steps=13 format=3 uid="uid://cb5w0xq0y46v1"]
+
+[ext_resource type="Script" uid="uid://dj7y5heyq6e1h" path="res://ui/score_screen.gd" id="1_eury7"]
+[ext_resource type="Texture2D" uid="uid://dfyltpxwo4ttd" path="res://assets/ui/LeaderboardScreen.png" id="1_gvt8i"]
+[ext_resource type="FontFile" uid="uid://dpyqhsm3me6t2" path="res://assets/font/LondrinaSolid-Black.ttf" id="2_eury7"]
+[ext_resource type="Texture2D" uid="uid://q4488trvfoko" path="res://assets/ui/Trophy.png" id="3_or5bq"]
+[ext_resource type="PackedScene" uid="uid://0uco7v1knhu0" path="res://ui/crown_sprite.tscn" id="4_j4hgc"]
+[ext_resource type="LabelSettings" uid="uid://xl7lna35epck" path="res://resource/score_label_settings.tres" id="5_2cxh2"]
+[ext_resource type="Texture2D" uid="uid://y6q0oeeu66oc" path="res://assets/ui/LeftArrow.png" id="7_or5bq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7w3qv"]
+font = ExtResource("2_eury7")
+font_size = 64
+outline_size = 16
+outline_color = Color(0.691406, 0.0471636, 0.0884597, 1)
+shadow_size = 16
+shadow_color = Color(0.203922, 0, 0, 0.654902)
+shadow_offset = Vector2(8, 8)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j4hgc"]
+texture = ExtResource("7_or5bq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2cxh2"]
+texture = ExtResource("7_or5bq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7w3qv"]
+texture = ExtResource("7_or5bq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h2s3u"]
+texture = ExtResource("7_or5bq")
+
+[node name="ScoreScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eury7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_gvt8i")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -134.5
+offset_top = 264.0
+offset_right = 134.5
+offset_bottom = 77.0
+grow_horizontal = 2
+text = "Game Over!"
+label_settings = SubResource("LabelSettings_7w3qv")
+
+[node name="Trophy" type="TextureRect" parent="TextureRect"]
+unique_name_in_owner = true
+modulate = Color(0.351563, 0.351563, 0.351563, 0.752941)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -31.0
+offset_right = 36.0
+offset_bottom = -437.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_or5bq")
+
+[node name="CrownSprite1" parent="TextureRect" instance=ExtResource("4_j4hgc")]
+unique_name_in_owner = true
+position = Vector2(275, 505)
+scale = Vector2(3, 3)
+
+[node name="CrownSprite2" parent="TextureRect" instance=ExtResource("4_j4hgc")]
+unique_name_in_owner = true
+position = Vector2(362, 505)
+scale = Vector2(3, 3)
+
+[node name="CrownSprite3" parent="TextureRect" instance=ExtResource("4_j4hgc")]
+unique_name_in_owner = true
+position = Vector2(448, 504)
+scale = Vector2(3, 3)
+
+[node name="CurrentScoreLabel" type="Label" parent="TextureRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -38.5
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Your Score: 2"
+label_settings = ExtResource("5_2cxh2")
+horizontal_alignment = 1
+
+[node name="BestScoreLabel" type="Label" parent="TextureRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 55.0
+offset_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Best Score: 99"
+label_settings = ExtResource("5_2cxh2")
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="TextureRect"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_top = -347.0
+offset_right = 49.0
+offset_bottom = -251.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/focus = SubResource("StyleBoxTexture_j4hgc")
+theme_override_styles/hover = SubResource("StyleBoxTexture_2cxh2")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_7w3qv")
+theme_override_styles/normal = SubResource("StyleBoxTexture_h2s3u")
+
+[connection signal="pressed" from="TextureRect/BackButton" to="." method="_on_back_button_pressed"]

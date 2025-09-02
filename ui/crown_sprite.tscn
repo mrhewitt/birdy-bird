@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://0uco7v1knhu0"]
+
+[ext_resource type="Texture2D" uid="uid://cfuw8ldqthpad" path="res://assets/ui/crown.png" id="1_lgjvq"]
+[ext_resource type="Script" uid="uid://b2sc0hh1cn8ci" path="res://ui/crown_sprite.gd" id="2_1ts74"]
+
+[node name="CrownSprite" type="Sprite2D"]
+modulate = Color(0.33, 0.33, 0.33, 0.5)
+texture = ExtResource("1_lgjvq")
+hframes = 3
+script = ExtResource("2_1ts74")
+empty_modulation = Color(0.337255, 0.337255, 0.337255, 0.592157)

@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://xl7lna35epck"]
+
+[ext_resource type="FontFile" uid="uid://dpyqhsm3me6t2" path="res://assets/font/LondrinaSolid-Black.ttf" id="1_vhaqf"]
+
+[resource]
+font = ExtResource("1_vhaqf")
+font_size = 64
+outline_size = 12
+outline_color = Color(0.0862745, 0.0588235, 0.345098, 1)
