@@ -3,6 +3,7 @@ class_name Player
 
 signal start_game
 signal player_died
+signal hit_obstacle
 
 const TOP_MARGIN:float = 25
 const GRAVITY:float = 8.0
@@ -55,8 +56,9 @@ func _physics_process(_delta: float) -> void:
 
 
 func die() -> void:
+	hit_obstacle.emit()
 	dead = true
-	SfxPlayer.play_random("dead")
+	SfxPlayer.play("dead")
 	animated_sprite_2d.play('death')
 	await animated_sprite_2d.animation_finished
 	visible = false

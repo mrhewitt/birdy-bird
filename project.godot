@@ -33,6 +33,10 @@ window/size/window_height_override=960
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_width"
 
+[editor]
+
+movie_writer/movie_file="C:/GameDev/Projects/Ten-Game-Challenge/birdy-bird/build/trailer/birdy-bird-trailer.avi"
+
 [input]
 
 fly_action={

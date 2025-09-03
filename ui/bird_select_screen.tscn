@@ -1,13 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://biuo4med0p8ir"]
+[gd_scene load_steps=19 format=3 uid="uid://biuo4med0p8ir"]
 
 [ext_resource type="Script" uid="uid://dctvqajoff62s" path="res://ui/bird_select_screen.gd" id="1_75pwq"]
 [ext_resource type="Texture2D" uid="uid://d1psdixhckdpl" path="res://assets/ui/BirdSelectScreen.png" id="1_htm5w"]
 [ext_resource type="Texture2D" uid="uid://buhf56g8vlsmp" path="res://assets/ui/pick-background.png" id="1_jhf4f"]
-[ext_resource type="PackedScene" uid="uid://omylpo6nsbcc" path="res://ui/play_button.tscn" id="2_wvupq"]
-[ext_resource type="Texture2D" uid="uid://y6q0oeeu66oc" path="res://assets/ui/LeftArrow.png" id="3_75pwq"]
 [ext_resource type="PackedScene" uid="uid://cmhdats80w0cp" path="res://player/bird_animation_sprite.tscn" id="3_jhf4f"]
-[ext_resource type="Texture2D" uid="uid://c85nfekcdb8sp" path="res://assets/ui/RightArrow.png" id="4_jhf4f"]
 [ext_resource type="FontFile" uid="uid://dpyqhsm3me6t2" path="res://assets/font/LondrinaSolid-Black.ttf" id="4_vepuh"]
+[ext_resource type="PackedScene" uid="uid://dgjvwpw5aln1q" path="res://ui/buttons/play_button.tscn" id="6_vepuh"]
+[ext_resource type="PackedScene" uid="uid://bnhatq1g8uroh" path="res://ui/buttons/screen_button.tscn" id="7_jhf4f"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1and0"]
 font = ExtResource("4_vepuh")
@@ -18,11 +17,35 @@ shadow_size = 12
 shadow_color = Color(0.968627, 0.458824, 0.0509804, 0.564706)
 shadow_offset = Vector2(4, 4)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vepuh"]
-texture = ExtResource("3_75pwq")
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vepuh"]
+load_path = "res://.godot/imported/LeftArrow.png-a7fe114ca7e0ef2a781795f2437a0fcf.ctex"
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1and0"]
-texture = ExtResource("4_jhf4f")
+texture = SubResource("CompressedTexture2D_vepuh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aoeus"]
+texture = SubResource("CompressedTexture2D_vepuh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t4w0b"]
+texture = SubResource("CompressedTexture2D_vepuh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_asw47"]
+texture = SubResource("CompressedTexture2D_vepuh")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m5g08"]
+load_path = "res://.godot/imported/RightArrow.png-b06ec80372f8cd04dd1bd7813de1198c.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vbtdc"]
+texture = SubResource("CompressedTexture2D_m5g08")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hdm0y"]
+texture = SubResource("CompressedTexture2D_m5g08")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s6sxg"]
+texture = SubResource("CompressedTexture2D_m5g08")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mc70b"]
+texture = SubResource("CompressedTexture2D_m5g08")
 
 [node name="BirdSelectScreen" type="Control"]
 layout_mode = 3
@@ -78,48 +101,52 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 animation = &"bird_05"
 
-[node name="PlayButton" parent="SelectBox" instance=ExtResource("2_wvupq")]
+[node name="PlayButton" parent="SelectBox" instance=ExtResource("6_vepuh")]
 layout_mode = 1
 anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.5
+offset_left = -64.0
 offset_top = -64.0
+offset_right = 64.0
 offset_bottom = 64.0
+grow_vertical = 0
 
-[node name="ButtonLeft" type="Button" parent="SelectBox"]
+[node name="ButtonLeft" parent="SelectBox" instance=ExtResource("7_jhf4f")]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 4
 anchor_top = 0.5
+anchor_right = 0.0
 anchor_bottom = 0.5
 offset_left = 96.0
-offset_top = -4.0
-offset_right = 8.0
-offset_bottom = 4.0
-grow_vertical = 2
-theme_override_styles/focus = SubResource("StyleBoxTexture_vepuh")
-theme_override_styles/hover = SubResource("StyleBoxTexture_vepuh")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_vepuh")
-theme_override_styles/normal = SubResource("StyleBoxTexture_vepuh")
+offset_top = -48.0
+offset_right = 192.0
+offset_bottom = 48.0
+grow_horizontal = 1
+theme_override_styles/focus = SubResource("StyleBoxTexture_1and0")
+theme_override_styles/hover = SubResource("StyleBoxTexture_aoeus")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_t4w0b")
+theme_override_styles/normal = SubResource("StyleBoxTexture_asw47")
 
-[node name="ButtonRight" type="Button" parent="SelectBox"]
+[node name="ButtonRight" parent="SelectBox" instance=ExtResource("7_jhf4f")]
+clip_contents = true
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
-anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -96.0
+offset_left = -192.0
 offset_top = -48.0
 offset_right = -96.0
 offset_bottom = 48.0
 grow_horizontal = 0
-grow_vertical = 2
-theme_override_styles/focus = SubResource("StyleBoxTexture_1and0")
-theme_override_styles/hover = SubResource("StyleBoxTexture_1and0")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_1and0")
-theme_override_styles/normal = SubResource("StyleBoxTexture_1and0")
+theme_override_styles/focus = SubResource("StyleBoxTexture_vbtdc")
+theme_override_styles/hover = SubResource("StyleBoxTexture_hdm0y")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_s6sxg")
+theme_override_styles/normal = SubResource("StyleBoxTexture_mc70b")
 
 [connection signal="pressed" from="SelectBox/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="SelectBox/ButtonLeft" to="." method="_on_button_left_pressed"]

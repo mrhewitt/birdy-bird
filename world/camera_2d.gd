@@ -11,3 +11,10 @@ func setup( _center_offset: float ) -> void:
 
 func _physics_process(_delta: float) -> void:
 	global_position.x = player.global_position.x + center_offset
+
+
+func shake() -> void:
+	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(self, 'zoom', Vector2(1.1,1.1), 0.2)
+	tween.tween_property(self, 'zoom', Vector2(0.95,0.95), 0.2)
+	tween.tween_property(self, 'zoom', Vector2.ONE, 0.2)

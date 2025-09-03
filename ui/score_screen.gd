@@ -26,5 +26,4 @@ func show_score( current_score: int, best_score: int ) -> void:
 
 
 func _on_back_button_pressed() -> void:
-	SfxPlayer.play_random('click')
 	back_to_menu.emit()

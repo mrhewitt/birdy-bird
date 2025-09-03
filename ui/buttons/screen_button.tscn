@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bnhatq1g8uroh"]
 
-[ext_resource type="Script" uid="uid://cp5e5xre6evgd" path="res://ui/screen_button.gd" id="1_2dn71"]
+[ext_resource type="Script" uid="uid://cp5e5xre6evgd" path="res://ui/buttons/screen_button.gd" id="1_2dn71"]
 
 [node name="ScreenButton" type="Button"]
 anchors_preset = 15

@@ -12,16 +12,13 @@ func _ready() -> void:
 	bird_animation_sprite.global_position = get_viewport_rect().size/2
 
 
-func _on_button_left_pressed() -> void:	
-	SfxPlayer.play_random('click')
+func _on_button_left_pressed() -> void:
 	current_bird = bird_animation_sprite.prev_bird()
 
 
-func _on_button_right_pressed() -> void:	
-	SfxPlayer.play_random('click')
+func _on_button_right_pressed() -> void:
 	current_bird = bird_animation_sprite.next_bird()
 
 
-func _on_play_button_pressed() -> void:	
-	SfxPlayer.play_random('click')
+func _on_play_button_pressed() -> void:
 	select_bird.emit(current_bird)

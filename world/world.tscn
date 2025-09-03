@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://eknmxiaijoh5"]
+[gd_scene load_steps=20 format=3 uid="uid://eknmxiaijoh5"]
 
 [ext_resource type="Script" uid="uid://2neqmkyo6xpc" path="res://world/world.gd" id="1_mmdvd"]
 [ext_resource type="PackedScene" uid="uid://c4xngmnw1f3x1" path="res://player/player.tscn" id="2_4717r"]
@@ -6,9 +6,15 @@
 [ext_resource type="FontFile" uid="uid://b17vgjeonwdha" path="res://assets/font/Beaver Punch.otf" id="3_4717r"]
 [ext_resource type="Script" uid="uid://cf0fvmls65xsp" path="res://world/camera_2d.gd" id="4_h5o24"]
 [ext_resource type="Texture2D" uid="uid://cb6v1c17osy4l" path="res://assets/ui/ScoreBackground.png" id="5_ai45w"]
+[ext_resource type="PackedScene" uid="uid://761n3ybx2i01" path="res://ui/buttons/pause_button.tscn" id="5_fyhu2"]
 [ext_resource type="PackedScene" uid="uid://b6dfrcm7iwwd1" path="res://ui/score_label.tscn" id="6_4papg"]
 [ext_resource type="FontFile" uid="uid://dpyqhsm3me6t2" path="res://assets/font/LondrinaSolid-Black.ttf" id="7_fyhu2"]
 [ext_resource type="PackedScene" uid="uid://0uco7v1knhu0" path="res://ui/crown_sprite.tscn" id="8_4papg"]
+[ext_resource type="Texture2D" uid="uid://d1psdixhckdpl" path="res://assets/ui/BirdSelectScreen.png" id="11_ocfjn"]
+[ext_resource type="PackedScene" uid="uid://dgjvwpw5aln1q" path="res://ui/buttons/play_button.tscn" id="12_dqqhb"]
+[ext_resource type="PackedScene" uid="uid://u17vyaob2nnc" path="res://ui/buttons/audio_bus_button.tscn" id="13_b2suy"]
+[ext_resource type="StyleBox" uid="uid://42ypp5rrhahr" path="res://resource/music_on_button.tres" id="14_b2suy"]
+[ext_resource type="StyleBox" uid="uid://bsyvpxotsgpof" path="res://resource/music_off_button.tres" id="15_h8lre"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h5o24"]
 font = ExtResource("3_4717r")
@@ -21,6 +27,17 @@ font = ExtResource("7_fyhu2")
 font_size = 48
 outline_size = 12
 outline_color = Color(0.0862745, 0.0588235, 0.345098, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_h8lre"]
+font = ExtResource("7_fyhu2")
+font_size = 85
+outline_size = 12
+outline_color = Color(0.152406, 0.426588, 0.25037, 1)
+shadow_size = 12
+shadow_color = Color(0.306454, 0.731204, 0.343342, 0.564706)
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_b2suy"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_mmdvd")
@@ -44,6 +61,12 @@ script = ExtResource("4_h5o24")
 player = NodePath("../Player")
 
 [node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="PauseButton" parent="HUD" instance=ExtResource("5_fyhu2")]
+unique_name_in_owner = true
+visible = false
+offset_left = 32.0
+offset_top = 32.0
 
 [node name="StartPrompLabel" type="Label" parent="HUD"]
 anchors_preset = 14
@@ -101,12 +124,91 @@ unique_name_in_owner = true
 position = Vector2(77, 10)
 rotation = 0.622676
 
-[node name="Button" type="Button" parent="HUD"]
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="PauseArea" type="Control" parent="HUD"]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseArea"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -274.0
+offset_bottom = 274.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_ocfjn")
+
+[node name="PlayButton" parent="HUD/PauseArea/TextureRect" instance=ExtResource("12_dqqhb")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -96.0
+offset_right = 68.0
+offset_bottom = 32.0
+
+[node name="MusicBusButton" parent="HUD/PauseArea/TextureRect" instance=ExtResource("13_b2suy")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = -151.0
+offset_top = -189.0
+offset_right = -87.0
+offset_bottom = -125.0
+grow_vertical = 0
+audio_bus_name = "Music"
+style_box_on = ExtResource("14_b2suy")
+style_box_off = ExtResource("15_h8lre")
+
+[node name="SfxBusButton" parent="HUD/PauseArea/TextureRect" instance=ExtResource("13_b2suy")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = 99.0
+offset_top = -189.0
+offset_right = 163.0
+offset_bottom = -125.0
+grow_vertical = 0
+audio_bus_name = "SFX"
+
+[node name="Label" type="Label" parent="HUD/PauseArea/TextureRect"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 102.0
+grow_horizontal = 2
+text = "Game Paused!"
+label_settings = SubResource("LabelSettings_h8lre")
+horizontal_alignment = 1
 
 [node name="PipeGenerator" type="Timer" parent="."]
 
+[node name="KillPlane" type="Area2D" parent="."]
+position = Vector2(0, 1133)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillPlane"]
+shape = SubResource("WorldBoundaryShape2D_b2suy")
+
+[connection signal="hit_obstacle" from="Player" to="." method="_on_player_hit_obstacle"]
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
 [connection signal="start_game" from="Player" to="." method="_on_player_start_game"]
+[connection signal="game_paused" from="HUD/PauseButton" to="." method="_on_pause_button_game_paused"]
+[connection signal="pressed" from="HUD/PauseArea/TextureRect/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="timeout" from="PipeGenerator" to="." method="_on_pipe_generator_timeout"]
+[connection signal="body_entered" from="KillPlane" to="." method="_on_kill_plane_body_entered"]

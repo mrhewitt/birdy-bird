@@ -14,10 +14,8 @@ signal pick_bird
 
 	
 func _on_play_button_pressed() -> void:
-	SfxPlayer.play_random('click')
 	start_game.emit()
 
 
 func _on_pick_bird_button_pressed() -> void:
-	SfxPlayer.play_random('click')
 	pick_bird.emit()

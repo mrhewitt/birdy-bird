@@ -20,8 +20,10 @@ const PIPE_OBSTACLE = preload("res://world/pipe_obstacle.tscn")
 @onready var score_area: Control = %ScoreArea
 @onready var background_sprite_2d: Sprite2D = $ParallaxBackground/ParallaxLayer/BackgroundSprite2D
 @onready var crowns: Array[CrownSprite] = [%CrownSprite1, %CrownSprite2, %CrownSprite3]
-@onready var viewport_size := get_viewport_rect().size
+@onready var pause_button: PauseButton = %PauseButton
+@onready var pause_area: Control = %PauseArea
 
+@onready var viewport_size := get_viewport_rect().size
 
 # space between left edge of screen and player, used so we can measure where
 # current edge of screen is in world co-ords after scrolling
@@ -45,12 +47,13 @@ func _ready() -> void:
 
 
 func _on_player_start_game() -> void:
-	SfxPlayer.play_random('start')
+	SfxPlayer.play('start')
 	
 	for i in range(0,3):
 		crowns[i].score = 0		
 	start_promp_label.visible = false
 	score_area.visible = true
+	pause_button.visible = true
 	
 	compute_difficulty()
 	pipe_generator.start()
@@ -63,13 +66,21 @@ func _on_pipe_generator_timeout() -> void:
 	
 func score_point() -> void:
 	score += 1 
-	show_score(score)
-	compute_difficulty()
-	SfxPlayer.play_random("score_point")
+	show_score(score)	
+	compute_difficulty()	
 	
+	SfxPlayer.play_random("score_point")
+	if score > 0 and score % 10 == 0 and score <= 30:
+		SfxPlayer.play('level_up')
+		
 
 func compute_difficulty() -> void:
 	difficulty = mini(score/10,2)
+
+		
+		
+func show_score( _score: int ) -> void:	
+	score_label.text = str(_score)
 	# only get crown if u pass the difficulty level, so 
 	# 1 x bronze at 10-19
 	# 2 x silver at 20-29
@@ -77,10 +88,6 @@ func compute_difficulty() -> void:
 	for i in range(0,mini(3,score/10)):
 		crowns[i].score = score
 		
-		
-func show_score( _score: int ) -> void:	
-	score_label.text = str(_score)
-	
 	
 func generate_pipe() -> void:
 	var pipe_obstacle = PIPE_OBSTACLE.instantiate()
@@ -92,4 +99,23 @@ func generate_pipe() -> void:
 func _on_player_player_died() -> void:
 	queue_free()
 	game_over.emit(score)
-	
+
+
+func _on_pause_button_game_paused() -> void:
+	pause_button.visible = false
+	pause_area.visible = true
+	get_tree().paused = true
+
+
+func _on_play_button_pressed() -> void:
+	pause_button.visible = true
+	get_tree().paused = false
+	pause_area.visible = false
+
+
+func _on_player_hit_obstacle() -> void:
+	camera_2d.shake()
+
+
+func _on_kill_plane_body_entered(body: Node2D) -> void:
+	player.die()
