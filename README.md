@@ -1,10 +1,14 @@
-# 20 Game Challenge - Birdy - Bird
+# 20 Game Challenge : Birdy-Bird
 
 Game #1 in my attempt at the [20 game challenge](https://20_games_challenge.gitlab.io/challenge/) - Flappy Bird clone
 
 See it in action on Itch.io :  [Birdy-Bird](https://daddio-dragonslayer.itch.io/birdy-bird)
 
-<p align="center"><img width="560" src="https://res.cloudinary.com/dbgabg3vb/image/upload/Birdy_Bird_2025_09_03_11_57_37_pgjcc4.png" /></p>
+<p align="center">
+  <img height="320" src="https://res.cloudinary.com/dbgabg3vb/image/upload/Birdy_Bird_2025_09_03_11_56_41_t0a4zu.png" />
+  <img height="320" src="https://res.cloudinary.com/dbgabg3vb/image/upload/Birdy_Bird_2025_09_03_11_57_37_pgjcc4.png" />
+  <img height="320" src="https://res.cloudinary.com/dbgabg3vb/image/upload/Birdy_Bird_2025_09_03_11_57_45_qfvwmp.png" />
+</p>
 
 I have since looked at code for a couple of other Flappy Bird 20 Challenge games, and see mine differs in:
 1. I used a NinePatchRect which I scale to size of the obstacle, as opposed to making a large sprite the is offet to fit screen. 
@@ -32,4 +36,4 @@ https://craftpix.net/product/birdy-bird-game-assets
 
 ## Assets
 
-Ufortuantly assets are not available for this project as they are from my CraftPix subscription and the licence prohibits me from distributing them outside of a game build
+Unfortuantly assets are not available for this project as they are from my CraftPix subscription and the licence prohibits me from distributing them outside of a game build
