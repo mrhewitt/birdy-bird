@@ -2,7 +2,7 @@
 
 Game #1 in my attempt at the [20 game challenge](https://20_games_challenge.gitlab.io/challenge/) - Flappy Bird clone
 
-See it in action on Itch.io :  [Birdy-Bird](https://daddio-dragonslayer.itch.io/birdy-bird)
+See it in action on Itch.io:  [Birdy-Bird](https://daddio-dragonslayer.itch.io/birdy-bird)
 
 <p align="center"><img width="560" src="https://res.cloudinary.com/dbgabg3vb/image/upload/Birdy_Bird_2025_09_03_11_57_37_pgjcc4.png" /></p>
 

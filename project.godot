@@ -13,7 +13,7 @@ config_version=5
 config/name="Birdy Bird"
 run/main_scene="uid://fsh5hyqo2xe3"
 config/features=PackedStringArray("4.4", "Mobile")
-config/icon="res://icon.svg"
+config/icon="uid://pqtyqckjhf3y"
 
 [audio]
 
